@@ -1,0 +1,27 @@
+{
+  "context": {
+    "expression": "age >= 18 and degree in ['master','doctor'] and employed == True",
+    "benefit": "1200",
+    "capacity": 20,
+    "three_valued": true,
+    "units": {
+      "age": "years",
+      "benefit": "CNY"
+    }
+  },
+  "items": [
+    {
+      "id": "person-1",
+      "owner_id": "person-1",
+      "facts": {
+        "age": 25,
+        "degree": "master",
+        "employed": true
+      },
+      "demand": 1,
+      "amount": "1200",
+      "effective_from": "2026-11-16",
+      "request_key": "acceptance-1"
+    }
+  ]
+}
