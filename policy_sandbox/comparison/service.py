@@ -18,7 +18,7 @@ class ComparisonServiceOutcome:
 
 class ComparisonService:
     source_kind='scenario'
-    consumer_kind='evaluation'
+    consumer_kind='appraisal'
     def validate(self, value: Mapping[str,Any]) -> dict[str,Any]:
         item=dict(value)
         identifier=str(item.get('scenario_id') or item.get('id') or '').strip()

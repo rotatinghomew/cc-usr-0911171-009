@@ -6,7 +6,7 @@ from typing import Any,Iterable,Mapping,Sequence
 from ..storage import ConflictError,Database,NotFoundError
 
 @dataclass(frozen=True)
-class EvaluationSummary:
+class AppraisalSummary:
     count:int
     active:int
     quantity:int
@@ -15,8 +15,8 @@ class EvaluationSummary:
     earliest:str|None
     latest:str|None
 
-class EvaluationRepository:
-    kind='evaluation'
+class AppraisalRepository:
+    kind='appraisal'
     def __init__(self,database:Database): self.database=database
     def create(self,values:Mapping[str,Any]) -> int:
         record=self._normalize(values)
@@ -41,10 +41,10 @@ class EvaluationRepository:
             left=dt.date.fromisoformat(row['effective_from']); right=dt.date.fromisoformat(row['effective_to']) if row['effective_to'] else dt.date.max
             if start<=right and left<=end: result.append(row)
         return result
-    def summary(self,rows:Sequence[Mapping[str,Any]]|None=None) -> EvaluationSummary:
+    def summary(self,rows:Sequence[Mapping[str,Any]]|None=None) -> AppraisalSummary:
         values=list(rows) if rows is not None else self.all(); dates=[row['effective_from'] for row in values]
-        return EvaluationSummary(len(values),sum(row['status']=='active' for row in values),sum(int(row['quantity']) for row in values),sum((decimal.Decimal(str(row['amount'])) for row in values),decimal.Decimal('0')),len({row['owner_id'] for row in values}),min(dates) if dates else None,max(dates) if dates else None)
-    def by_category(self) -> dict[str,EvaluationSummary]:
+        return AppraisalSummary(len(values),sum(row['status']=='active' for row in values),sum(int(row['quantity']) for row in values),sum((decimal.Decimal(str(row['amount'])) for row in values),decimal.Decimal('0')),len({row['owner_id'] for row in values}),min(dates) if dates else None,max(dates) if dates else None)
+    def by_category(self) -> dict[str,AppraisalSummary]:
         groups={}
         for row in self.all(): groups.setdefault(row['category'],[]).append(row)
         return {category:self.summary(rows) for category,rows in sorted(groups.items())}

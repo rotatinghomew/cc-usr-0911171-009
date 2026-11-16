@@ -1,6 +1,6 @@
 import datetime as dt
 import unittest
-from policy_sandbox.evaluation.access_audit import AccessAuditor,AccessError
+from policy_sandbox.appraisal.access_audit import AccessAuditor,AccessError
 
 UTC=dt.timezone.utc
 NOW=dt.datetime(2026,11,16,10,tzinfo=UTC)

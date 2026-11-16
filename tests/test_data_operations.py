@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from policy_sandbox.facts.schema_registry import FieldSpec,SchemaError,SchemaRegistry
 from policy_sandbox.language.batch_ingestion import BatchIngestor,BatchReader,IngestionError
-from policy_sandbox.evaluation.version_history import VersionError,VersionHistory
+from policy_sandbox.appraisal.version_history import VersionError,VersionHistory
 from policy_sandbox.scenarios.query_engine import QueryEngine,QueryError
 from policy_sandbox.comparison.recovery_control import RecoveryController,RecoveryError
 from policy_sandbox.facts.person_repository import PersonRepository

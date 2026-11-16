@@ -215,8 +215,8 @@ class Database:
     def list_scenarios(self, owner_id: str | None = None, status: str | None = None) -> list[dict[str, Any]]:
         return self.list_records('scenario', owner_id=owner_id, status=status)
 
-    def list_evaluations(self, owner_id: str | None = None, status: str | None = None) -> list[dict[str, Any]]:
-        return self.list_records('evaluation', owner_id=owner_id, status=status)
+    def list_appraisals(self, owner_id: str | None = None, status: str | None = None) -> list[dict[str, Any]]:
+        return self.list_records('appraisal', owner_id=owner_id, status=status)
 
     def list_benefits(self, owner_id: str | None = None, status: str | None = None) -> list[dict[str, Any]]:
         return self.list_records('benefit', owner_id=owner_id, status=status)

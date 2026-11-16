@@ -1,6 +1,6 @@
 import decimal
 import unittest
-from policy_sandbox.evaluation.engine import PolicyEngine
+from policy_sandbox.appraisal.engine import PolicyEngine
 
 class DomainTests(unittest.TestCase):
     def setUp(self): self.engine=PolicyEngine()

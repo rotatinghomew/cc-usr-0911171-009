@@ -6,33 +6,33 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Any, Iterable, Mapping, Sequence
 
-class EvaluationServiceError(RuntimeError):
+class AppraisalServiceError(RuntimeError):
     pass
 
 @dataclass(frozen=True)
-class EvaluationServiceOutcome:
+class AppraisalServiceOutcome:
     policy_id: str
     status: str
     reasons: tuple[str,...]
     measures: Mapping[str,Any]
 
-class EvaluationService:
+class AppraisalService:
     source_kind='policy'
     consumer_kind='clause'
     def validate(self, value: Mapping[str,Any]) -> dict[str,Any]:
         item=dict(value)
         identifier=str(item.get('policy_id') or item.get('id') or '').strip()
-        if len(identifier)<2: raise EvaluationServiceError('policy_id is required')
+        if len(identifier)<2: raise AppraisalServiceError('policy_id is required')
         item['policy_id']=identifier
         quantity=int(item.get('quantity',0))
-        if quantity<0: raise EvaluationServiceError('quantity cannot be negative')
+        if quantity<0: raise AppraisalServiceError('quantity cannot be negative')
         item['quantity']=quantity
         amount=decimal.Decimal(str(item.get('amount','0'))).quantize(decimal.Decimal('0.01'))
-        if amount<0: raise EvaluationServiceError('amount cannot be negative')
+        if amount<0: raise AppraisalServiceError('amount cannot be negative')
         item['amount']=amount
         return item
 
-    def decide(self, value: Mapping[str,Any], related: Sequence[Mapping[str,Any]], now: dt.datetime) -> EvaluationServiceOutcome:
+    def decide(self, value: Mapping[str,Any], related: Sequence[Mapping[str,Any]], now: dt.datetime) -> AppraisalServiceOutcome:
         item=self.validate(value); identifier=item['policy_id']; reasons=[]
         active=[row for row in related if row.get('status') in {'active','received','validated'}]
         owned=[row for row in active if row.get('owner_id')==item.get('owner_id')]
@@ -43,7 +43,7 @@ class EvaluationService:
         if item['amount']+total_amount>decimal.Decimal(str(item.get('amount_limit','1000000000'))): reasons.append('amount_limit_exceeded')
         status='accepted' if not reasons else 'rejected'
         measures={'related_active':len(active),'owner_active':len(owned),'owner_quantity':total_quantity,'owner_amount':str(total_amount),'evaluated_at':now.isoformat(),'consumer_kind':self.consumer_kind}
-        return EvaluationServiceOutcome(identifier,status,tuple(reasons),measures)
+        return AppraisalServiceOutcome(identifier,status,tuple(reasons),measures)
 
     def group(self, values: Iterable[Mapping[str,Any]], key: str='owner_id') -> dict[str,list[dict[str,Any]]]:
         result=defaultdict(list)

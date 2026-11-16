@@ -1,4 +1,4 @@
-from policy_sandbox.evaluation.engine import PolicyEngine
+from policy_sandbox.appraisal.engine import PolicyEngine
 
 import unittest
 

@@ -3,7 +3,7 @@ import decimal
 import unittest
 from policy_sandbox.facts.state_policy import StatePolicy,StatePolicyError,Transition
 from policy_sandbox.language.reconciliation import Reconciler,ReconciliationError
-from policy_sandbox.evaluation.privacy_projection import FieldPolicy,PrivacyError,PrivacyProjector
+from policy_sandbox.appraisal.privacy_projection import FieldPolicy,PrivacyError,PrivacyProjector
 from policy_sandbox.scenarios.notification_router import NotificationError,NotificationRouter,Subscription
 
 UTC=dt.timezone.utc

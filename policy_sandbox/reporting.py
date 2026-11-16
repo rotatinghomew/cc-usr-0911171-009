@@ -27,7 +27,7 @@ class Reporter:
         records.extend(self.database.list_records('policy'))
         records.extend(self.database.list_records('clause'))
         records.extend(self.database.list_records('scenario'))
-        records.extend(self.database.list_records('evaluation'))
+        records.extend(self.database.list_records('appraisal'))
         records.extend(self.database.list_records('benefit'))
         records.extend(self.database.list_records('comparison'))
         manifest=AuditVerifier().manifest(records)

@@ -3,7 +3,7 @@ import decimal
 import unittest
 from policy_sandbox.facts.interval_index import Interval,IntervalError,IntervalIndex
 from policy_sandbox.language.data_quality import AllowedValues,Consistency,ForeignKey,Freshness,QualitySuite,RequiredFields,UniqueKey,ValueRange
-from policy_sandbox.evaluation.lineage_graph import LineageError,LineageGraph
+from policy_sandbox.appraisal.lineage_graph import LineageError,LineageGraph
 from policy_sandbox.scenarios.metric_catalog import MetricCatalog,MetricDefinition,MetricError
 from policy_sandbox.comparison.change_capture import ChangeCapture,ChangeError
 

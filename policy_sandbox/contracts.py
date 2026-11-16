@@ -348,8 +348,8 @@ class ScenarioRecord:
         return dataclasses.asdict(self)
 
 @dataclass(frozen=True)
-class EvaluationRecord:
-    evaluation_id: str
+class AppraisalRecord:
+    appraisal_id: str
     owner_id: str
     category: str
     status: str = 'draft'
@@ -361,7 +361,7 @@ class EvaluationRecord:
     version: int = 0
 
     def __post_init__(self) -> None:
-        object.__setattr__(self, 'evaluation_id', require_identifier(self.evaluation_id, 'evaluation_id'))
+        object.__setattr__(self, 'appraisal_id', require_identifier(self.appraisal_id, 'appraisal_id'))
         object.__setattr__(self, 'owner_id', require_identifier(self.owner_id, 'owner_id'))
         object.__setattr__(self, 'category', require_text(self.category, 'category', 2, 80))
         if self.status not in {item.value for item in State}:
@@ -383,7 +383,7 @@ class EvaluationRecord:
             return None
         return (self.effective_to - self.effective_from).days + 1
 
-    def with_status(self, status: str) -> 'EvaluationRecord':
+    def with_status(self, status: str) -> 'AppraisalRecord':
         if status not in {item.value for item in State}:
             raise ContractError('unsupported status')
         return dataclasses.replace(self, status=status, version=self.version + 1)
@@ -485,7 +485,7 @@ RECORD_TYPES = {
     'policy': PolicyRecord,
     'clause': ClauseRecord,
     'scenario': ScenarioRecord,
-    'evaluation': EvaluationRecord,
+    'appraisal': AppraisalRecord,
     'benefit': BenefitRecord,
     'comparison': ComparisonRecord,
 }
