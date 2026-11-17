@@ -1,0 +1,94 @@
+{
+  "captured_at": "2026-11-17T00:00:00+00:00",
+  "units": {
+    "age": "years",
+    "income": "CNY",
+    "rent": "CNY"
+  },
+  "persons": [
+    {
+      "id": "person-1",
+      "as_of": "2026-11-17",
+      "facts": {
+        "age": 25,
+        "income": 8000,
+        "rent": 3200,
+        "degree": "master",
+        "employed": true
+      },
+      "fact_sources": {
+        "age": "hr-import:person-1:age",
+        "income": "tax-feed:person-1:income",
+        "rent": "housing-decl:person-1:rent",
+        "degree": "edu-verify:person-1:degree",
+        "employed": "social-sec:person-1:employed"
+      }
+    },
+    {
+      "id": "person-2",
+      "as_of": "2026-11-17",
+      "facts": {
+        "age": 35,
+        "income": 12000,
+        "rent": 4100,
+        "degree": "bachelor",
+        "employed": true
+      },
+      "fact_sources": {
+        "age": "hr-import:person-2:age",
+        "income": "tax-feed:person-2:income",
+        "rent": "housing-decl:person-2:rent",
+        "degree": "edu-verify:person-2:degree",
+        "employed": "social-sec:person-2:employed"
+      }
+    },
+    {
+      "id": "person-3",
+      "as_of": "2026-11-17",
+      "facts": {
+        "age": 28,
+        "rent": 2800,
+        "degree": "master",
+        "employed": true
+      },
+      "fact_sources": {
+        "age": "hr-import:person-3:age",
+        "rent": "housing-decl:person-3:rent",
+        "degree": "edu-verify:person-3:degree",
+        "employed": "social-sec:person-3:employed"
+      }
+    },
+    {
+      "id": "person-4",
+      "as_of": "2026-11-17",
+      "facts": {
+        "age": 17,
+        "income": 3000,
+        "rent": 1500,
+        "degree": "bachelor",
+        "employed": false
+      },
+      "fact_sources": {
+        "age": "hr-import:person-4:age",
+        "income": "tax-feed:person-4:income",
+        "rent": "housing-decl:person-4:rent",
+        "degree": "edu-verify:person-4:degree",
+        "employed": "social-sec:person-4:employed"
+      }
+    }
+  ],
+  "old_policy": {
+    "expression": "age >= 18 and income >= 5000 and degree in ['master','doctor'] and employed == True",
+    "effective_from": "2025-01-01",
+    "benefit": "1200.00",
+    "currency": "CNY",
+    "budget_cap": "10000.00"
+  },
+  "new_policy": {
+    "expression": "age >= 16 and income >= 4000 and degree in ['master','doctor','bachelor'] and employed == True",
+    "effective_from": "2027-01-01",
+    "benefit": "1500.00",
+    "currency": "CNY",
+    "budget_cap": "12000.00"
+  }
+}
